@@ -96,4 +96,40 @@ describe("Recipes", function(){
         );
     });
 
+    // Test PUT endpoint to update a recipe
+    // Test Strategy
+    //  1: initialize data
+    //  2: make GET request to get id of item to update
+    //  3: add id to `updateData`
+    //  4: Make PUT request with `updateData`
+    //  5. Inspect response object for status code and key/values
+    it("should update recipe items on PUT", function() {
+        const updateData = {
+            name: "hummus", 
+            ingredients: ["garbanzo beans", "lemon", "garlic"]
+        };
+
+        return(
+            chai    
+                .request(app)
+                // get object to update
+                .get("/recipes")
+                // get the id in the response object
+                .then(function(res) {
+                    updateData.id = res.body[0].id;
+                    return chai
+                        .request(app)
+                        .put(`/recipes/${updateData.id}`)
+                        .send(updateData);
+                })
+            // Prove Put request has correct status code and updated item
+            .then(function(res) {
+                expect(res).to.have.status(204);
+                expect(res).to.be.json;
+                expect(res.body).to.be.a("object");
+                expect(res.body).to.deep.equal(updateData);
+            })      
+        );
+    });
+
 });
