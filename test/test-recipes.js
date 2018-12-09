@@ -69,14 +69,31 @@ describe("Recipes", function(){
                 expect(res.body).to.include.keys("id", "name", "ingredients");
                 expect(res.body.id).to.not.equal(null);
                 // response deep equal(?) new item above if assigned `id`
-                // expect(res.body).to.deep.equal(
-                //     Object.assign(newItem, { id: res.body.id })
-                // );
+                expect(res.body).to.deep.equal(
+                    Object.assign(newItem, { id: res.body.id })
+                );
             });
     
     });
 
 
     // Test DELETE endpoint
+    // Test strategy
+    //  1: GET shopping list items to get ID of one
+    //  2: Delete item and ensure we get back 204
+    it("should delete recipe item on DELETE", function(){
+        return (
+            chai
+                .request(app)
+                // Get the shopping list and id of an item
+                .get("/recipes")
+                .then(function(res) {
+                    return chai.request(app).delete(`/recipes/${res.body[0].id}`);
+                })
+                .then(function(res) {
+                    expect(res).to.have.status(204);
+                })
+        );
+    });
 
 });
