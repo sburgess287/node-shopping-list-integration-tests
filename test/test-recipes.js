@@ -57,7 +57,26 @@ describe("Recipes", function(){
     //  2. Inspect response object and prove it has 
     //      correct status code and returned object has "id"
     it("should add a recipe item on POST", function() {
-        const newItem = { name: "salsa", checked: false }; // what is checked: false for?
+        const newItem = { name: "salsa", ingredients : ["tomato", "garlic", "habenero"]};
+        return chai
+            .request(app)
+            .post("/recipes")
+            .send(newItem)
+            .then(function(res) {
+                expect(res).to.have.status(201);
+                expect(res).to.be.json;
+                expect(res.body).to.be.a("object");
+                expect(res.body).to.include.keys("id", "name", "ingredients");
+                expect(res.body.id).to.not.equal(null);
+                // response deep equal(?) new item above if assigned `id`
+                // expect(res.body).to.deep.equal(
+                //     Object.assign(newItem, { id: res.body.id })
+                // );
+            });
+    
     });
+
+
+    // Test DELETE endpoint
 
 });
