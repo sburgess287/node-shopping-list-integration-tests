@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: zLuX1ucAHVmDsQuQjhTgsGQdjWuo6DbTInX5r6Uq3RjO+x3CyawNEwqSOEuvgDsB06tws5tcwSq2waHNQWmUoMOc4VJkVRE/pPJr5CaYSA3J9SBferWRkSI6F32SD9hBSoSgzIll6CH/GCKSpUxHQqxW8rjG2VV9q4qgD5F33l6mUsVkUqC1jCZeDNoJZzg0WHav1FI74Liu7GDIplxRiOyJdwAMvucpKK+x+IZL0Grd7SLvx4GmLb1+KLt2pnPb1bvnlq9Ztrw78EuYb/UX8BwmkTqM1Zt7E67V7q+9/hiG/oDvPtLdZ2EajHDdOcb0dE8wO6y6Ch7ksI/huvHX1el+g28FLKasm5OAo6o1QF/ApVXH89VCElyx+5OW5GizAmGZ8qQfniP1Q7kG0v2HjtpPD8/MufgPp4W0oyH1mcmAx/CbvVSbLBNMx6lty2+oFbj1X4CFzcy5Rvewc9Op+6vYvpTByS2obWpeiy8SNMz6ZGEvGdAb36JzqrpLn08Mj8q3DU8ciwLdmJRbqRH68kWR3FQKsguF50W6uu6QdwIHdSEKjWbyBjxLjyHv/WN180jIvC/VOqeKYlR+ofTo0dL7NNXhIxly1cx1kebWejj6AmQTxIENa/9xJTEOIPMLhodrNbcDCdhQAc/QUFTtearLEOHRleKwmc6t5Nk/z68=
+  app: https://immense-basin-68222.herokuapp.com/
+  on:
+    repo: sburgess287/node-shopping-list-integration-tests
