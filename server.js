@@ -12,9 +12,10 @@ app.use(morgan("common"));
 
 app.use(express.static("public"));
 
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/views/index.html");
-});
+app.use(express.static("views"));
+// app.get("/", (req, res) => {
+//   res.sendFile(__dirname + "/views/index.html");
+// });
 
 // when requests come into `/shopping-list` or
 // `/recipes`, we'll route them to the express
@@ -32,12 +33,12 @@ let server;
 // In our test code, we need a way of asynchronously starting
 // our server, since we'll be dealing with promises there.
 function runServer() {
-  const port = process.env.PORT || 8080;
+  const port = process.env.PORT || 8080; // sets a backup default here 8080
   return new Promise((resolve, reject) => {
     server = app
       .listen(port, () => {
         console.log(`Your app is listening on port ${port}`);
-        resolve(server);
+        resolve();
       })
       .on("error", err => {
         reject(err);

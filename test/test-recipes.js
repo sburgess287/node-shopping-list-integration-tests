@@ -29,10 +29,10 @@ describe("Recipes", function(){
     // Test GET endpoint
     it("should list recipe items on GET", function() {
         return chai
-            .request(app)
-            .get("/recipes")
-            .then(function(res) {
-                expect(res).to.have.status(200);
+            .request(app) // pass in app
+            .get("/recipes") // pass in endpoint
+            .then(function luna (res) { // pass in the function, then accept the request
+                expect(res).to.have.status(200); // pass req into expect
                 expect(res).to.be.json;
                 expect(res.body).to.be.a("array");
 
@@ -68,8 +68,8 @@ describe("Recipes", function(){
                 expect(res.body).to.be.a("object");
                 expect(res.body).to.include.keys("id", "name", "ingredients");
                 expect(res.body.id).to.not.equal(null);
-                // response deep equal(?) new item above if assigned `id`
-                expect(res.body).to.deep.equal(
+                // response deep equal new item above if assigned `id`
+                expect(res.body).to.eql(
                     Object.assign(newItem, { id: res.body.id })
                 );
             });
@@ -122,12 +122,11 @@ describe("Recipes", function(){
                         .put(`/recipes/${updateData.id}`)
                         .send(updateData);
                 })
-            // Prove Put request has correct status code and updated item
+            // Prove Put request has correct status code and updated item(?)
             .then(function(res) {
                 expect(res).to.have.status(204);
-              //  expect(res).to.be.json;
                 expect(res.body).to.be.a("object");
-              //  expect(res.body).to.deep.equal(updateData);
+              // Get?
             })      
         );
     });
